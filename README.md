@@ -8,3 +8,5 @@ In this project I will try to implement some machine learning algorithms in pyth
 $ git checkout dev
 $ git checkout master
 ```
+### Data Set
+* All classification algorithms for this project will be demonstrated in dealing with handwritten digit recognition. We will use the mnist dataset, which you can get [here](http://yann.lecun.com/exdb/mnist/).

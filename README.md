@@ -13,6 +13,5 @@ $ git checkout master
 
 ### Contents
 * KNN(k-NearestNeighbor)
-
   When using knn for handwritten digit recognition, 95.8% accuracy was obtained on the mnist data set. However, the testing process can take half an hour or more.
   

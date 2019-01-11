@@ -1,7 +1,9 @@
+import sys
+sys.path.append('..')
 import algorithm.knn as KNN
 from loader.load_mnist import load_mnist
 def test_knn():
-    path = "../dataset/mnist"
+    path = "../../dataset/mnist"
     k = 30
     train_x,train_y = load_mnist(path)
     test_x,test_y = load_mnist(path,'t10k')

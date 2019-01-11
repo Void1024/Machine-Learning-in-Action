@@ -2,13 +2,13 @@ import os
 import struct
 import numpy as np
 
-def load_mnist(path, kind='train'):
+def load_mnist(path, kind='train',is_value_binary = True):
     """Load MNIST data from `path`"""
     labels_path = os.path.join(path,
-                               '%s-labels-idx1-ubyte'
+                               '%s-labels.idx1-ubyte'
                                % kind)
     images_path = os.path.join(path,
-                               '%s-images-idx3-ubyte'
+                               '%s-images.idx3-ubyte'
                                % kind)
     with open(labels_path, 'rb') as lbpath:
         magic, n = struct.unpack('>II',
@@ -21,5 +21,8 @@ def load_mnist(path, kind='train'):
                                                imgpath.read(16))
         images = np.fromfile(imgpath,
                              dtype=np.uint8).reshape(len(labels), 784)
+
+    if is_value_binary:
+        images = np.minimum(images,1)
 
     return images, labels

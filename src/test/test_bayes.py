@@ -8,7 +8,7 @@ def test() :
     path = "../../dataset/mnist"
     dataSet,labels = load_mnist(path,'train')
     testX,testY = load_mnist(path,'t10k')
-    Bayes.naive_bayes_train(dataSet,labels)
+    Bayes.train(dataSet,labels)
     check = 0
     total = 0
     for i in range(len(testX)):
@@ -20,3 +20,8 @@ def test() :
 
 if __name__ == '__main__':
     test()
+
+    
+ 
+
+

@@ -51,7 +51,8 @@ def majority_cnt(classList) :
         classCount[vote] += 1
     return sorted(classCount.items(),key = operator.itemgetter(1),reverse = True)[0][0]
 
-def create_tree(dataSet,labels) :
+def create_tree(dataSet,labelList) :
+    labels = labelList[:]
     classList = [item[-1] for item in dataSet]
     if len(dataSet[0]) == 1:
         return majority_cnt(classList)
@@ -70,5 +71,17 @@ def create_tree(dataSet,labels) :
     return myTree
 
 
+def classify(tree,testVec,labels) :
+    firstStr = list(tree.keys())[0]
+    secondDict = tree[firstStr]
+    for val in secondDict.keys():
+        if val == testVec[labels.index(firstStr)]:
+            if type(secondDict[val]).__name__ == 'dict':
+                classLabel = classify(secondDict[val],testVec,labels)
+            else:
+                classLabel = secondDict[val]
+        elif val == list(secondDict.keys())[-1]:
+            classLabel = 'Error ! The "%s" value is out of trainset range.' % firstStr
+    return classLabel
 
 

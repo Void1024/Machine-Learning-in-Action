@@ -13,20 +13,23 @@ $ git checkout master
 
 ### Contents
 * *KNN ( K-NearestNeighbor )*
+  
   **data set : Mnist
   accuracy : 95.8%**
   When using knn for handwritten digit recognition, 95.8% accuracy was obtained on the mnist data set. However, the testing process can take half an hour or more.
 
 * *Decision Tree*
+  
   **data set : None
   accuracy : Unknown**
   This algorithm can perform very well on expert systems, but it is very unsuitable for mnist data sets, so I did not test it.
 * *Naive-Bayes*
+  
   **data set : Mnist
   accuracy : 84.1%**
   
   Naive Bayes is able to achieve good results in text classification, but this algorithm is not suitable for processing images. Compared to KNN, it is faster in testing, but the accuracy on the mnist dataset is only about 84%.
 
 ### Convention
-* **Naming :** ~~The naming methods of files and functions are UnderScore-Case, and the variable names are named with Camel-Case.~~ I will use these two different naming methods:**Camel-Case** and **UnderScore-Case**.
+* **Naming :** ~~The naming methods of files and functions are UnderScore-Case, and the variable names are named with Camel-Case.~~ I will use these two different naming methods : **Camel-Case** and **UnderScore-Case**.
   

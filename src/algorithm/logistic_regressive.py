@@ -2,12 +2,10 @@ import numpy as np
 
 weightsList = {}
 
-# alpha = 0.000005
-alpha = 0.001
-maxCycle = 200
+alpha = 0.01
+maxCycle = 300
 
 def sig_moid(inX) :
-    # print('y',inX.sum()/inX.size)
     return 1.0 / (1 + np.exp(-inX))
 
 def arg_set(inAlpha = 0.001,inCycle = 500) :
@@ -17,9 +15,9 @@ def arg_set(inAlpha = 0.001,inCycle = 500) :
 
 def cal_weight(dataSet,labelList,goal = 1) :
     labels = np.array(labelList)
-    labels[labels == goal] = -1
-    labels[labels != -1] = 0
-    labels[labels == -1] = 1
+    labels[labels == goal] = 10
+    labels[labels != 10] = 0
+    labels[labels == 10] = 1
     global weightsList
     dataMat = np.mat(dataSet)
     labelMat = np.mat(labels).transpose()
@@ -28,21 +26,18 @@ def cal_weight(dataSet,labelList,goal = 1) :
     weightsList[goal] = np.random.rand(n + 1,1)
 
     for i in range(maxCycle):
-        # print('x',dataMat.sum()/dataMat.size)
-        
         h = sig_moid(dataMat * weightsList[goal])
-        # print('z',h.sum()/h.size)
         weightsList[goal] += alpha * dataMat.transpose() * (labelMat - h)
-    #     if i % 50 == 0:
-            
-    #         tem = h
-    #         tem[tem > 0.5] = 1
-    #         tem[tem <= 0.5] = 0
-    #         tem -= np.mat(labels).transpose()
-    #         tem[tem == 0] = 10
-    #         tem[tem != 10] = 0
-    #         tem[tem == 10] = 1
-    #         print('i:%d,acc:%f' % (i,tem.sum() / tem.size))
+
+        if i % 50 == 0:    
+            tem = dataMat * weightsList[goal]
+            tem[tem > 0.5] = 1
+            tem[tem <= 0.5] = 0
+            tem -= np.mat(labels).transpose()
+            tem[tem == 0] = 10
+            tem[tem != 10] = 0
+            tem[tem == 10] = 1
+            print('i:%d,acc:%f' % (i,tem.sum() / tem.size))
     print(goal)
     return weightsList[goal]
 
@@ -56,16 +51,8 @@ def classify(testVec) :
     predictLabel = -1
     for i in range(10):
         probability = sig_moid(np.mat(testVec) * weightsList[i])[0][0]
-        # print(i)
-        # print(probability)
-        # if probability > maxProbability:
-        #     maxProbability = probability
-        #     predictLabel = i
         if probability > 0.5:
             return i
     return predictLabel
 
-
-def draw(dataSet,labels,) :
-    pass
 

@@ -8,20 +8,14 @@ import numpy as np
 def test() :
     path = "../../dataset/mnist"
     dataSet,labels = load_mnist(path)
-    trainX = []
-    trainY = []
-    for i in range(10):
-        trainX.extend(dataSet[i*1000:i*1000+99])
-        trainY.extend(labels[i*1000:i*1000+99])
+    trainX = dataSet
+    trainY = labels
     logReg.train(trainX,trainY)
-    # testX,testY = load_mnist(path,'t10k')
-    testX = trainX
-    testY = trainY
+    testX,testY = load_mnist(path,'t10k')
     testX = np.hstack((np.ones((len(testX),1)),testX))
     check = 0
     total = 0
     for i in range(len(testX)):
-        
         predict = logReg.classify(testX[i])
         print('label:%d,predict:%d'%(testY[i],predict))
         if predict == testY[i]:
